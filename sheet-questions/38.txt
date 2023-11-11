@@ -1,0 +1,98 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Clone a Linked List with random pointers
+Last Updated: 11 Jul, 2023
+Easy
+0/40
+28 upvotes
++10 more
+Problem Statement
+Suggest Edit
+You are given a linked list containing 'n' nodes, where every node in the linked list contains two pointers:
+
+
+
+
+(1) ‘next’ which points to the next node in the list
+(2) ‘random’ which points to a random node in the list or 'null'.
+
+
+
+
+Your task is to create a 'deep copy' of the given linked list and return its head.
+
+
+
+
+Note:
+A 'deep copy' of a linked list means we do not copy the references of the nodes of the original linked list, rather for each node in the original linked list, a new node is created.
+
+
+
+
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1:
+5
+1 2 3 4 5
+2 0 4 4 1
+
+
+
+
+
+Sample Output 1:
+True
+
+
+
+
+
+Explanation Of Sample Input 1:
+For the given test case, “True” will be printed if the linked list is successfully cloned.
+
+
+
+
+
+Sample Input 2:
+2
+1 2
+1 0
+
+
+
+
+
+Sample Output 2:
+True
+
+
+
+
+
+Expected Time Complexity:
+Try to do this in O(n).
+
+
+
+
+
+Expected Space Complexity:
+Try to do this without using extra space.
+
+
+
+
+
+Constraints:
+1 <= n <= 5 * 10^4
+-10^5 <= Node.data <= 10^5
+-1 <= ri < n
+
+Prev
+Next

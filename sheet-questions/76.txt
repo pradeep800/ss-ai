@@ -1,0 +1,138 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Implement Queue using Arrays
+Contributed by
+Sarthak Mathur
+Easy
+0/40
+20 upvotes
+Problem Statement
+Suggest Edit
+Queue is a linear data structure that follows the idea of First In First Out. That means insertion and retrieval operations happen at opposite ends.
+
+
+
+
+Implement a simple queue using arrays.
+
+
+
+
+You are given 'query' queries which are either of the 2 types:
+
+
+
+
+1 'e': Enqueue (add) element ‘e’ at the end of the queue.
+2: Dequeue (retrieve) the element from the front of the queue. If the queue is empty, return -1.
+
+
+
+
+Example:
+Input: Queries: 
+             [ 1 2,
+               1 7,
+               2,
+               1 13, 
+               2, 
+               2, 
+               2 ]
+
+Output:
+         [ 2, 
+           7, 
+           13,  
+           -1 ]
+
+Explanation: After each operation, our queue is equal to the following:
+1 2: {2}
+1 7: {2, 7}
+2: {7} and 2 is printed
+1 13: {7, 13}
+2: {13} and 7 is printed
+2: {} and 13 is printed
+2: {} and -1 is printed since the queue is empty.
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1:
+7
+1 2
+1 7
+2
+1 13
+2
+2
+2
+
+
+
+
+
+Sample Output 1:
+2 7 13 -1
+
+
+
+
+
+Explanation Of Sample Input 1 :
+After each operation, our queue is equal to the following:
+1 2: {2}
+1 7: {2, 7}
+2: {7} and 2 is printed
+1 13: {7, 13}
+2: {13} and 7 is printed
+2: {} and 13 is printed
+2: {} and -1 is printed since the queue is empty.
+
+
+
+
+
+Sample Input 2 :
+4
+2
+2
+1 2
+1 4
+
+
+
+
+
+Sample Output 2 :
+-1 -1
+
+
+
+
+
+Explanation Of Sample Input 2 :
+After each operation, our queue is equal to the following:
+2: {} and -1 is printed since the queue is empty.
+2: {} and -1 is printed since the queue is empty.
+1 2: {2}
+1 4: {2, 4}
+
+
+
+
+
+Expected Time Complexity :
+Both the enqueue() and dequeue() functions should solve in constant time, that is O(1) time complexity.
+
+
+
+
+
+Constraints:
+1 <= ‘query’ <= 10^5
+1 <= ‘e’ <= 10^6
+
+Prev
+Next

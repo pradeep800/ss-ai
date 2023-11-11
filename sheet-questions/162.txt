@@ -1,0 +1,82 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Check Bipartite Graph
+Contributed by
+Ankush Gupta
+Medium
+0/80
+50 mins
+50 %
+65 upvotes
++24 more
+Problem Statement
+Suggest Edit
+Given a graph, check whether the graph is bipartite or not. Your function should return true if the given graph's vertices can be divided into two independent sets, ‘U’ and ‘V’ such that every edge (‘u’, ‘v’) either connects a vertex from ‘U’ to ‘V’ or a vertex from ‘V’ to ‘U’.
+You are given a 2D array ‘edges’ which contains 0 and 1, where ‘edges[i][j]’ = 1 denotes a bi-directional edge from ‘i’ to ‘j’.
+Note:
+If edges[i][j] = 1, that implies there is a bi-directional edge between ‘i’ and ‘j’, that means there exists both edges from ‘i’ to ‘j’ and to ‘j’ to ‘i’.
+
+For example
+Given:
+‘N’ = 3
+‘edges’ = [[0, 1, 1], [0, 0, 1], [0,0,0]]. 
+
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Constraints:
+1 <= ‘T’ <= 10
+2 <= ‘N’ <= 300
+0 <= ‘edges[i][j]’ <= 1. 
+
+Time Limit: 1sec.
+
+Sample Input 1 :
+2
+4
+0 1 0 0 
+0 0 0 1 
+0 0 0 0 
+0 0 0 0 
+3
+0 1 1
+0 0 1
+0 0 0
+
+Sample Output 1 :
+1
+0 
+
+Explanation of the Sample Input 1:
+In the first test case, the graph is visualized as below,
+
+
+The graph can be divided into 2 disjointed sections, i.e. S1 = {0,2} and S2 = {1,3}. Therefore the answer is true.
+
+In the second test case, the graph is visualized as below: 
+
+
+The answer is 0 since there is no way this graph can be divided into 2 disjoint sets of points.
+
+Sample Input 2 :
+2
+4
+0 0 1 0 
+0 0 0 1 
+0 0 0 0 
+0 0 0 0 
+3
+0 1 1
+0 0 0 
+0 0 0
+
+Sample Output 2 :
+1
+1
+
+Striver SDE Sheet Problems
+Prev
+Next

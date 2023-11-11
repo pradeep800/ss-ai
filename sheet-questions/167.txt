@@ -1,0 +1,56 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Floyd Warshall
+Contributed by
+Hardik Agrawal
+Medium
+0/80
+40 mins
+60 %
+21 upvotes
++2 more
+Problem Statement
+Suggest Edit
+You have been given a directed weighted graph of ‘N’ vertices labeled from 1 to 'N' and ‘M’ edges. Each edge connecting two nodes 'u' and 'v' has a weight 'w' denoting the distance between them.
+Your task is to find the length of the shortest path between the ‘src’ and ‘dest’ vertex given to you in the graph using Flloyd warshall’s algorithm. The graph may contain negatively weighted edges.
+Example :
+
+3 3 1 3
+1 2 2
+1 3 2
+2 3 -1
+In the above graph, the length of the shortest path between vertex 1 and vertex 3 is 1->2->3 with a cost of 2 - 1 = 1.
+
+Note :
+It's guaranteed that the graph doesn't contain self-loops and multiple edges. Also the graph does not contain negative weight cycles.
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1 :
+1    
+4 4 1 4
+1 2 4
+1 3 3
+2 4 7 
+3 4 -2
+
+Sample Output 1 :
+1
+
+Explanation For Sample Output 1 :
+
+The optimal path from source vertex 1 to destination vertex 4 is 1->3->4 with a cost of 3 - 2 = 1.
+
+Sample Input 2 :
+1
+2 1 1 2
+2 1 3
+
+Sample Output 2 :
+1000000000
+
+Prev
+Next

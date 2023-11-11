@@ -1,0 +1,55 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Day 13 : Print Permutations - String
+Contributed by
+Ashwani
+Easy
+0/40
+30 mins
+80 %
+102 upvotes
++23 more
+Problem Statement
+Suggest Edit
+You are given an input string 'S'. Your task is to find and return all possible permutations of the input string.
+Note:
+1. The input string may contain the same characters, so there will also be the same permutations.
+
+2. The order of permutation does not matter.
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1:
+cba
+
+Sample Output 1:
+abc
+acb
+bac
+bca
+cab
+cba
+
+Explanation For Sample Output 1:
+All the possible permutations for string "cba" will be "abc", "acb", "bac", "bca", "cab" and "cba".
+
+Sample Input 2:
+xyx
+
+Sample Output 2:
+xyx
+xxy
+yxx
+yxx
+xyx
+xxy
+
+Explanation For Sample Output 2:
+All the possible permutations for string "xyx" will be "xyx", "xxy", "yxx", "yxx", "xyx" and "xxy". Here, all three permutations "xyx", "yxx", "xxy" are repeating twice but we need to print all the possible permutations and hence we are printing them twice..
+
+Striver SDE Sheet Problems
+Prev
+Next

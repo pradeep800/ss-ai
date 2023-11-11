@@ -1,0 +1,43 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Longest Substring Without Repeating Characters
+Contributed by
+Anish De
+Medium
+0/80
+30 mins
+65 %
+83 upvotes
++36 more
+Problem Statement
+Suggest Edit
+Given a string input of length n, find the length of the longest substring without repeating characters i.e return a substring that does not have any repeating characters.
+Substring is the continuous sub-part of the string formed by removing zero or more characters from both ends.
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Constraints:
+ 1<= n <=10^5
+
+Time Limit: 1 sec
+
+Sample Input 1:
+ abcabcbb 
+
+Sample Output1:
+ 3
+
+Explanation For Sample Input 1:
+Substring "abc" has no repeating character with the length of 3.
+
+Sample Input 2:
+ aaaa
+
+Sample Output 2:
+1
+
+Striver SDE Sheet Problems
+Prev
+Next

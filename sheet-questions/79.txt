@@ -1,0 +1,59 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Valid Parentheses
+Contributed by
+Amandeep Kaur
+Easy
+0/40
+10 mins
+80 %
+240 upvotes
++63 more
+Problem Statement
+Suggest Edit
+You're given a string 'S' consisting of "{", "}", "(", ")", "[" and "]" .
+
+
+
+
+Return true if the given string 'S' is balanced, else return false.
+
+
+
+
+For Example:
+'S' = "{}()".
+
+There is always an opening brace before a closing brace i.e. '{' before '}', '(' before ').
+So the 'S' is Balanced.
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1 :
+[()]{}{[()()]()}
+
+Sample Output 1 :
+Balanced
+
+Explanation Of The Sample Input 1 :
+There is always an opening brace before a closing brace i.e. '{' before '}', '(' before '), '[' before ']'.
+So the 'S' is Balanced.
+
+Sample Input 2 :
+[[}[
+
+Sample Output 2 :
+Not Balanced
+
+Constraints:
+1 <= 'N' <= 10^5
+
+Where 'N' is the length of the input string 'S'.
+Time Limit: 1 sec
+
+Striver SDE Sheet Problems
+Prev
+Next

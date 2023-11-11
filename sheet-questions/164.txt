@@ -1,0 +1,67 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+Strongly Connected Components (Tarjan’s Algorithm)
+Contributed by
+Ankit Kharb
+Hard
+0/120
+15 mins
+85 %
+36 upvotes
++7 more
+Problem Statement
+Suggest Edit
+You are given an unweighted directed graph of 'V' vertices and 'E' edges. Your task is to print all the strongly connected components (SCCs) present in the graph.
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Constraints:
+1 <= 'T' <= 300 
+1 <= 'V' <= 2000
+'V' - 1 <= 'E' <= 2000
+0 <= 'a, b' < 'V'
+
+Time Limit: 1 sec
+
+Sample Input 1:
+1
+5 6
+0 1
+1 2
+1 4
+2 3
+3 2
+4 0
+
+Sample Output 1:
+0 1 4 
+2 3 
+
+Explanation For Sample Input 1:
+For the first test case, the graph is shown below. There are two SCCs in the graph, which are enclosed in the boxes as shown in the image below.
+
+
+Sample Input 2:
+2
+1 0
+4 4
+0 1
+1 2
+2 3
+3 1
+
+Sample Output 2:
+0
+0
+1 2 3
+
+Explanation For Sample Input 2:
+For the first test case, the graph has 1 node(0) but there are no edges, therefore only 1 SCC exists and that is {0}.
+
+For the second test case, one SCC is {0} and the other is {1, 2, 3}. Therefore the answer is 0, 1 2 3
+
+Striver SDE Sheet Problems
+Prev
+Next

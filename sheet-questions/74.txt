@@ -1,0 +1,59 @@
+Topics
+Problem
+Submissions
+Solution
+Discuss
+K Most Frequent Elements
+Contributed by
+Abhinav Jain
+Medium
+0/80
+10 mins
+85 %
+26 upvotes
++12 more
+Problem Statement
+Suggest Edit
+You are given an Integer array ‘ARR’ and an Integer ‘K’.
+
+
+
+
+Your task is to find the ‘K’ most frequent elements in ‘ARR’. Return the elements in any order.
+
+
+
+
+For Example:
+You are given ‘ARR’ = {1, 2, 2, 3, 3} and ‘K’ = 2. 
+
+The answer will {2, 3} as 2 and 3 are the elements occurring most times.
+
+Detailed explanation ( Input/output format, Notes, Images )
+keyboard_arrow_down
+Sample Input 1:
+5 2
+1 2 2 3 3 
+
+Sample Output 1:
+2 3
+
+Explanation Of Sample Input 1:
+The answer will {2, 3} as 2 and 3 are the elements occurring the most number of times.
+
+Sample Input 2:
+2 2
+1 2 
+
+Sample Output 2:
+1 2
+
+Constraints:
+1 <= 'N' <= 10^5
+1 <= 'K' <= Number of unique elements in ‘ARR’
+1 <= 'ARR[i]' <= 10^6
+
+Time Limit: 1 sec
+
+Prev
+Next
