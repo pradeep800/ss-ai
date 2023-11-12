@@ -17,7 +17,6 @@ export function API({ stack }: StackContext) {
     handler: "packages/functions/src/ai.handler",
     timeout: 60,
     memorySize: 512,
-
     bind: [
       bucket,
       secret.DATABASE_URL,
