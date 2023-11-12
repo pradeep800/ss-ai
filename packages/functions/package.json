@@ -15,10 +15,12 @@
   "dependencies": {
     "@planetscale/database": "^1.11.0",
     "@types/jsonwebtoken": "^9.0.5",
+    "dayjs": "^1.11.10",
     "drizzle-orm": "^0.28.6",
     "jsonwebtoken": "^9.0.2",
     "lambda-stream": "^0.5.0",
     "openai": "^4.17.3",
+    "resend": "^2.0.0",
     "zod": "^3.22.4"
   }
 }

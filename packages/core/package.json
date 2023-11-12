@@ -15,9 +15,11 @@
     "@planetscale/database": "^1.11.0",
     "@types/aws-lambda": "^8.10.126",
     "aws-lambda": "^1.0.7",
+    "dayjs": "^1.11.10",
     "drizzle-orm": "^0.28.6",
     "lambda-stream": "^0.5.0",
     "openai": "^4.17.3",
+    "resend": "^2.0.0",
     "undici": "^5.27.2",
     "zod": "^3.22.4"
   }

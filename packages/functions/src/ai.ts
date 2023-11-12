@@ -1,16 +1,17 @@
-import { db } from "@ss-ai/core/db/drizzle";
-import { aiChatMessages } from "@ss-ai/core/db/schema";
-import fs from "fs";
-import { openai } from "@ss-ai/core/src/openai";
+import { db } from "@ss-ai/core/src/db/drizzle";
+import { aiChatMessages } from "@ss-ai/core/src/db/schema";
+import { openai } from "@ss-ai/core/src/utils/openai";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Config } from "sst/node/config";
 import { ResponseStream, streamifyResponse, isInAWS } from "lambda-stream";
-import { aiRouteValidator } from "@ss-ai/core/validator/ai-route";
-import { userValidator } from "@ss-ai/core/validator/token-info";
-import { StopStreaming } from "@ss-ai/core/src/stop-streaming";
+import { aiRouteValidator } from "@ss-ai/core/src/validator/ai-route";
+import { userValidator } from "@ss-ai/core/src/validator/token-info";
+import { StopStreaming } from "@ss-ai/core/src/utils/stop-streaming";
 import { eq, and, desc } from "drizzle-orm";
+import { Bucket } from "sst/node/bucket";
+import { S3 } from "aws-sdk";
 const previousConversationCount = 4;
-
+const s3 = new S3();
 const metadata = {
   statusCode: 200,
   headers: {
@@ -30,10 +31,9 @@ export const handler = streamifyResponse(async function (
   ) {
     return StopStreaming(responseStream, "unauthorized");
   }
-
-  //check token info
   const header = event["headers"]["authorization"].split(" ")[1];
 
+  //check token info
   let payload: string | JwtPayload;
   try {
     payload = jwt.verify(header, Config.AI_JWT_SECRET);
@@ -45,6 +45,7 @@ export const handler = streamifyResponse(async function (
     return StopStreaming(responseStream, "unauthorized");
   }
   const userInfo = validator.data;
+
   // check if awslmabda is present
   if ("awslambda" in global && typeof global.awslambda === "object") {
     // @ts-ignore
@@ -68,7 +69,6 @@ export const handler = streamifyResponse(async function (
   if (!body.success) {
     return StopStreaming(responseStream, "Server Error");
   }
-
   //fetch previous conversation
   const previousConversations = await db
     .select({
@@ -84,12 +84,16 @@ export const handler = streamifyResponse(async function (
     )
     .orderBy(desc(aiChatMessages.created_at))
     .limit(previousConversationCount);
-  console.log(previousConversations);
   previousConversations.reverse();
 
   //get question
-  const question = fs
-    .readFileSync(`./sheet-questions/${body.data.questionNumber}.txt`)
+  const params = {
+    Bucket: Bucket.SS.bucketName,
+    Key: "sheet-questions/1.txt",
+  };
+
+  const object = await s3.getObject(params).promise();
+  const question = object?.Body?.toString()
     .toString()
     .replace(/(\r\n|\n|\r)/gm, " ")
     .trim();
@@ -106,7 +110,6 @@ ${previousConversations.map((message) => {
 })}
 User: ${body.data.message}?
 `;
-  console.log(content);
   try {
     const openAiStream = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -115,7 +118,7 @@ User: ${body.data.message}?
       messages: [
         {
           role: "system",
-          content: `You are DSA expert and you have question in context and give answer in markdown syntex and write small response`,
+          content: `You are DSA expert and you have question in context and give answer in markdown syntex and write small response and start with writing answer without writing dsa export or Assistant`,
         },
         {
           role: "user",
@@ -126,13 +129,11 @@ User: ${body.data.message}?
     let response = "";
     for await (const chunk of openAiStream) {
       const data = chunk.choices[0]?.delta.content;
-      console.log(data);
       if (typeof data === "string") {
         response += data;
-        responseStream.write(chunk.choices[0]?.delta?.content || "");
+        responseStream.write(data || "");
       }
     }
-    console.log(response);
     await db.transaction(async (tx) => {
       await tx.insert(aiChatMessages).values({
         question_no: body.data.questionNumber,
@@ -149,6 +150,7 @@ User: ${body.data.message}?
     });
     responseStream.end();
   } catch (err) {
+    console.log(err);
     return StopStreaming(responseStream, "Server Error");
   }
 });
