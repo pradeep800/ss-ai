@@ -59,7 +59,7 @@ export const handler = async () => {
       from: "reminders@pradeepbisht.com",
       to: user.email,
       subject: "Reminders",
-      react: EmailReminder({
+      html: EmailReminder({
         questionsInfo: questionInfo,
       }),
       headers: {

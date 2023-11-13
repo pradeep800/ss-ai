@@ -15,13 +15,13 @@ export function API({ stack }: StackContext) {
 
   const aiFunction = new Function(stack, "Ai", {
     handler: "packages/functions/src/ai.handler",
-    timeout: 60,
+    timeout: 120,
     memorySize: 512,
     bind: [
       bucket,
       secret.DATABASE_URL,
       secret.OPENAI_KEYS,
-      secret.AI_JWT_SECRET,
+      secret.LAMBDA_SECRET,
     ],
     url: { cors: { allowHeaders: ["*"], allowOrigins: ["*"] } },
   });

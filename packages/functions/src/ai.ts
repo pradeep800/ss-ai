@@ -12,14 +12,7 @@ import { Bucket } from "sst/node/bucket";
 import { S3 } from "aws-sdk";
 const previousConversationCount = 4;
 const s3 = new S3();
-const metadata = {
-  statusCode: 200,
-  headers: {
-    "Content-Type": "text/plain",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": true,
-  },
-};
+
 export const handler = streamifyResponse(async function (
   event,
   responseStream
@@ -36,28 +29,19 @@ export const handler = streamifyResponse(async function (
   //check token info
   let payload: string | JwtPayload;
   try {
-    payload = jwt.verify(header, Config.AI_JWT_SECRET);
+    payload = jwt.verify(header, Config.LAMBDA_SECRET);
   } catch (err) {
     return StopStreaming(responseStream, "unauthorized");
   }
+
   const validator = userValidator.safeParse(payload);
   if (!validator.success) {
     return StopStreaming(responseStream, "unauthorized");
   }
   const userInfo = validator.data;
 
-  // check if awslmabda is present
-  if ("awslambda" in global && typeof global.awslambda === "object") {
-    // @ts-ignore
-    const rs = global.awslambda.HttpResponseStream.from(
-      responseStream,
-      metadata
-    );
+  responseStream.setContentType("text/plain");
 
-    responseStream = rs as ResponseStream;
-  } else {
-    responseStream.setContentType("text/plain");
-  }
   // parse body information
   if (!event.body) {
     return StopStreaming(responseStream, "Server Error");
@@ -113,7 +97,7 @@ User: ${body.data.message}?
   try {
     const openAiStream = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      temperature: 0,
+
       stream: true,
       messages: [
         {

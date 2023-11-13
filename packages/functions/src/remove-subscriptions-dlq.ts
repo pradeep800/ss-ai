@@ -5,7 +5,10 @@ export const handler = async function (event: SQSEvent) {
   const data = await resend.emails.send({
     from: "alert@pradeepbisht.com",
     to: ["pradeep8b0@gmail.com"],
-    subject: "Cron Job Fail",
-    html: "<h1>Cron Job Fail for email reminder</h1>",
+    subject: "Cron Job Fail For Subscriptions",
+    headers: {
+      "X-Entity-Ref-ID": Date.now().toString(),
+    },
+    html: `<h1>Cron Job Fail To Remove Subscription at ${new Date().toISOString()}</h1> `,
   });
 };

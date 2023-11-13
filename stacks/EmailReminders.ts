@@ -16,7 +16,7 @@ export function SendRemindersCron({ stack }: StackContext) {
 
   const emailReminderCron = new Cron(stack, "SendReminders", {
     job: "packages/functions/src/send-reminders.handler",
-    schedule: "rate(1 minute)",
+    schedule: "rate(1 hour)",
   });
   emailReminderCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);
 }
