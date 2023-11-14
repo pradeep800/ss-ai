@@ -12,7 +12,7 @@ import { Bucket } from "sst/node/bucket";
 import { S3 } from "aws-sdk";
 const previousConversationCount = 4;
 const s3 = new S3();
-
+import crypto from "crypto";
 export const handler = streamifyResponse(async function (
   event,
   responseStream
@@ -73,7 +73,7 @@ export const handler = streamifyResponse(async function (
   //get question
   const params = {
     Bucket: Bucket.SS.bucketName,
-    Key: "sheet-questions/1.txt",
+    Key: `sheet-questions/${body.data.questionNumber}.txt`,
   };
 
   const object = await s3.getObject(params).promise();
@@ -102,7 +102,7 @@ User: ${body.data.message}?
       messages: [
         {
           role: "system",
-          content: `You are DSA expert and you have question in context and give answer in markdown syntex and write small response and start with writing answer without writing dsa export or Assistant`,
+          content: `You are DSA expert and you have question in context give answer to user if you don't know answer say I don't know or it's out of context please ask question related to dsa and don't start by writing assistant or answer:`,
         },
         {
           role: "user",
@@ -120,16 +120,21 @@ User: ${body.data.message}?
     }
     await db.transaction(async (tx) => {
       await tx.insert(aiChatMessages).values({
+        id: crypto.randomUUID(),
         question_no: body.data.questionNumber,
         userId: userInfo.id,
         message: body.data.message,
         sender: "USER",
+        created_at: Date.now(),
       });
       await tx.insert(aiChatMessages).values({
+        id: crypto.randomUUID(),
         question_no: body.data.questionNumber,
         userId: userInfo.id,
         message: response,
+
         sender: "AI",
+        created_at: Date.now() + 4,
       });
     });
     responseStream.end();
