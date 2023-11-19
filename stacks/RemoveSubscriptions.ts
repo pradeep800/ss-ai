@@ -11,6 +11,7 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
   const removeSubscriptionFn = new Function(stack, "DLQReminderSendFn", {
     handler: "packages/functions/src/remove-subscriptions.handler",
     retryAttempts: 2,
+    timeout: 900,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });

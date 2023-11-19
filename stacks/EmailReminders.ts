@@ -10,6 +10,7 @@ export function SendRemindersCron({ stack }: StackContext) {
   const sendReminderFn = new Function(stack, "DLQSendRemindersFn", {
     handler: "packages/functions/src/send-reminders.handler",
     retryAttempts: 2,
+    timeout: 900,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });
