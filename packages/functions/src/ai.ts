@@ -102,7 +102,7 @@ User: ${body.data.message}?
       messages: [
         {
           role: "system",
-          content: `You are DSA expert and you have question in context give answer to user if you don't know answer say I don't know or it's out of context please ask question related to dsa and don't start by writing assistant or answer:`,
+          content: `You are DSA expert and you have question in context give answer to user only answer question regarding writing code and query regarding question which is in context and don't start by writing assistant or answer:`,
         },
         {
           role: "user",

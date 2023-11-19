@@ -6,16 +6,17 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
   const queue = new Queue(stack, "DLQEmailSend", {
     consumer: "packages/functions/src/remove-subscriptions-dlq.handler",
   });
+  queue.bind([secret.RESEND_API_KEY]);
 
-  const fn = new Function(stack, "DLQReminderSendFn", {
+  const reminderRemoveFn = new Function(stack, "DLQReminderSendFn", {
     handler: "packages/functions/src/remove-subscriptions.handler",
-    retryAttempts: 1,
+    retryAttempts: 3,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });
 
   const emailReminderCron = new Cron(stack, "EmailReminder", {
-    job: "packages/functions/src/remove-subscriptions.handler",
+    job: reminderRemoveFn,
     schedule: "rate(3 hours)",
   });
   emailReminderCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);

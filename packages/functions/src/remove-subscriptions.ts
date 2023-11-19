@@ -6,7 +6,6 @@ export const runtime = "edge";
 export const revalidate = 0;
 export const handler = ApiHandler(async (event) => {
   const todayDate = new Date();
-
   await db
     .update(users)
     .set({ role: "USER" })

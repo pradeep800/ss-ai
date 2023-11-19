@@ -51,7 +51,7 @@ export const aiChatMessages = table(
     sender: mysqlEnum("sender", ["USER", "AI"]).notNull().default("USER"), //<-- only for migration
     userId: varchar("user_id", { length: 255 }).notNull(),
     message: text("message"),
-    created_at: bigint("created_at", { mode: "bigint" }).notNull(),
+    created_at: bigint("created_at", { mode: "number" }).notNull(),
   },
   (data) => {
     return { created_idx: index("created_at_index").on(data.created_at) };

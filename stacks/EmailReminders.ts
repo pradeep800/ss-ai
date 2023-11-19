@@ -6,16 +6,16 @@ export function SendRemindersCron({ stack }: StackContext) {
   const queue = new Queue(stack, "DLQSendReminders", {
     consumer: "packages/functions/src/send-reminders-dlq.handler",
   });
-
-  const fn = new Function(stack, "DLQSendRemindersFn", {
+  queue.bind([secret.RESEND_API_KEY]);
+  const sendReminderFn = new Function(stack, "DLQSendRemindersFn", {
     handler: "packages/functions/src/send-reminders.handler",
-    retryAttempts: 1,
+    retryAttempts: 3,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });
 
   const emailReminderCron = new Cron(stack, "SendReminders", {
-    job: "packages/functions/src/send-reminders.handler",
+    job: sendReminderFn,
     schedule: "rate(3 hours)",
   });
   emailReminderCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);
