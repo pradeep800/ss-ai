@@ -10,7 +10,7 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
 
   const reminderRemoveFn = new Function(stack, "DLQReminderSendFn", {
     handler: "packages/functions/src/remove-subscriptions.handler",
-    retryAttempts: 3,
+    retryAttempts: 2,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });
