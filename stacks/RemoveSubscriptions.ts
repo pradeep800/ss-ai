@@ -8,7 +8,7 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
   });
   queue.bind([secret.RESEND_API_KEY]);
 
-  const reminderRemoveFn = new Function(stack, "DLQReminderSendFn", {
+  const removeSubscriptionFn = new Function(stack, "DLQReminderSendFn", {
     handler: "packages/functions/src/remove-subscriptions.handler",
     retryAttempts: 2,
     deadLetterQueue: queue.cdk.queue,
@@ -16,7 +16,7 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
   });
 
   const emailReminderCron = new Cron(stack, "EmailReminder", {
-    job: reminderRemoveFn,
+    job: removeSubscriptionFn,
     schedule: "rate(3 hours)",
   });
   emailReminderCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);

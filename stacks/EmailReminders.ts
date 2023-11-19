@@ -9,7 +9,7 @@ export function SendRemindersCron({ stack }: StackContext) {
   queue.bind([secret.RESEND_API_KEY]);
   const sendReminderFn = new Function(stack, "DLQSendRemindersFn", {
     handler: "packages/functions/src/send-reminders.handler",
-    retryAttempts: 3,
+    retryAttempts: 2,
     deadLetterQueue: queue.cdk.queue,
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });

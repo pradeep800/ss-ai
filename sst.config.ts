@@ -18,4 +18,7 @@ export default {
       .stack(SendRemindersCron);
   },
 } satisfies SSTConfig;
-//NEXT_SECRET DATABASE_URL OPENAI_KEYS
+
+/// there are two stages one
+//new
+//prod
