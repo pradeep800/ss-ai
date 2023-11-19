@@ -15,9 +15,9 @@ export function RemoveSubscriptionsCron({ stack }: StackContext) {
     bind: [secret.DATABASE_URL, secret.RESEND_API_KEY],
   });
 
-  const emailReminderCron = new Cron(stack, "EmailReminder", {
+  const removeSubscriptionCron = new Cron(stack, "EmailReminder", {
     job: removeSubscriptionFn,
     schedule: "rate(3 hours)",
   });
-  emailReminderCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);
+  removeSubscriptionCron.bind([secret.DATABASE_URL, secret.RESEND_API_KEY]);
 }
